@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.catecat.cate.bean.Cate" table="cate">
+        <id name="id" length="40">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+        <property name="name" type="string" length="40" unique="true"/>
+        <property name="shopPrice" type="float" length="6"/>
+        <property name="marketPrice" type="float" length="6"/>
+        <property name="isOnline" type="int" length="1"/>
+        <property name="about" type="string" length="40"/>
+        <property name="onLineTime" type="date"/>
+        <property name="introduce" type="string" length="250"/>
+        <property name="category" type="string" length="450"/>
+        <many-to-one name="log" column="log_id" unique="true" cascade="all" lazy="false" not-found="ignore" />
+       	<set name="categorys" lazy="true" fetch="join"> <!--分类多对多  -->
+      	  	<key column="cate_id"></key><!-- 当前类列名 -->
+        	<many-to-many class="cn.catecat.category.bean.Category" column="category_id"/><!-- 外键类列名 -->
+        </set> 
+       	<set name="images" lazy="true" cascade="all" fetch="join">	<!-- 图片多对多 -->
+      	  	<key column="cate_id"></key><!-- 当前类列名 -->
+        	<many-to-many class="cn.catecat.image.bean.Image" column="image_id" foreign-key="id"/><!-- 外键类列名 -->
+        </set>
+        
+    </class>
+
+</hibernate-mapping>

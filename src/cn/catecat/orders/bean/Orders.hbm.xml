@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--  * 用户类
+	 *  ID 					id				String/varchar		40
+		总计				total				float/number
+		商品个数			cartItemCount		Integer/number  	250
+		外送地址			address				String/varchar		250
+		送餐时间			sendTime			String/varchar		40
+		留言				leaveWords			String/varchar		250
+		订单生成时间		createOrderstime	String/varchar		40
+		交易完成时间		receiveTime			String/varchar		40
+		预支付			prepayment			float/number		 
+		订单项		orderItem				Set< OrderItem>  	外键 一对多
+		订单状态			status				外键status
+		用户ID			user				外键user	
+		-->
+	<class name="cn.catecat.orders.bean.Orders" table="orders">
+		<id name="id" type="string" length="40">
+			<generator class="org.hibernate.id.UUIDGenerator"/>
+		</id>
+		<property name="total" type="float" length="40"/>
+		<property name="cartItemCount" type="integer" length="250"/>
+		<property name="address" type="string" length="250"/>
+		<property name="leaveWords" type="string" length="250"/>
+		<property name="createOrdersTime" type="string" length="40"/>
+		<property name="receiveTime" type="string" length="40"/>
+		<property name="sendTime" type="string" length="40"/>
+		<property name="prepayment" type="float" length="40"/>
+		<!-- 订单与状态表表关联  多对一 单向-->
+		<many-to-one name="status" lazy="false"
+					 class="cn.catecat.status.bean.Status"
+					 column="status_id"></many-to-one>
+		<!-- 订单与订单项表关联 一对多 单向 -->
+		<set name="orderItems" cascade="all" inverse="true" lazy="false">
+			<key column="orders_id"/>
+			<one-to-many class="cn.catecat.orders.bean.OrderItem"/>			
+		</set>
+		
+		<!-- 关联关系：与用户的关系 -->
+		<many-to-one name="user" lazy="false" class="cn.catecat.user.bean.User" column="user_id"></many-to-one>
+		
+	</class>
+</hibernate-mapping>

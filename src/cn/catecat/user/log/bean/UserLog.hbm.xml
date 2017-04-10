@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 用户日志记录类
+	 * money			用户余额
+	 * experience		用户经验
+	 * payPassword		用户支付密码
+	 * lastLoginTime	最后登陆时间
+	 * lastSignTime		最后签到时间
+	 * signCount		签到次数
+	 * forumExp			今日论坛获取经验
+	 * sendCount		今日发帖数
+	 * user   			用户
+	  -->
+	 <class name="cn.catecat.user.log.bean.UserLog" table="user_log">
+	 	<id name="id" type="string" length="40">
+	 		<generator class="org.hibernate.id.UUIDGenerator"/>
+	 	</id>
+	 	<property name="money" type="float" length="40"/>
+	 	<property name="experience" type="long" length="20"/>
+	 	<property name="lastLoginTime" type="string" length="40"/>
+	 	<property name="lastSignTime" type="string" length="40"/>
+	 	<property name="signCount" type="integer"/>
+	 	<property name="forumExp" type="integer" length="3"/>
+	 	<property name="sendCount" type="integer" length="2"/>
+	 	
+	 	<many-to-one name="user" class="cn.catecat.user.bean.User" column="user_id" unique="true"></many-to-one> 
+	 </class>
+</hibernate-mapping>

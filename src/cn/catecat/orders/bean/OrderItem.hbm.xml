@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- 	/**
+		 * ID					id				String/varchar 	 40
+	 	美食名字			name			String/varchar   	 40
+		美食数量			count   			int/number	     10
+		美食单价			price			float/number
+		小计				subtotal			float/number	
+		美食ID				cate			   	外键cate
+		订单ID				orders			外键orders
+
+		 */ -->
+	<class name="cn.catecat.orders.bean.OrderItem" table="orderItem">
+		<id name="id" type="string" length="40">
+			<generator class="org.hibernate.id.UUIDGenerator"/>
+		</id>
+		<property name="name" type="string" length="40"/>
+		<property name="count" type="integer" length="10"/>
+		<property name="price" type="float" length="40"/>
+		<property name="subtotal" type="float" length="40"/>
+		<!-- 关联关系：与订单的关系 -->
+		<many-to-one name="orders" class="cn.catecat.orders.bean.Orders" column="orders_id"></many-to-one>
+		
+		<!-- 关联关系:与美食的关系 -->
+		<many-to-one name="cate" lazy="false" class="cn.catecat.cate.bean.Cate" column="cate_id"></many-to-one>
+		
+	</class>
+</hibernate-mapping>

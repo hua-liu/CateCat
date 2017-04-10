@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.catecat.status.bean.Status" table="status">
+        <id name="id" type="string" length="20">
+            <generator class="assigned"/><!-- 程序处理 -->
+        </id>
+        <property name="type" length="10"/>
+        <property name="name"  length="20"/>
+        <property name="decription" length="40"/>
+    </class>
+
+</hibernate-mapping>

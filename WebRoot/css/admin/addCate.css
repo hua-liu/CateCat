@@ -1,0 +1,98 @@
+li{
+	list-style: none;
+}
+button{
+    overflow:hidden;
+    word-break: break-all;word-wrap: break-word;
+}
+.sourceInfor{
+	position:absolute;
+    border:1px solid #CCC;
+    background:rgba(255,255,255,0.5);
+    z-index:20;
+     -webkit-box-shadow: 0 0 5px #000;
+    -moz-box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px #000;
+}
+.sourceInfor caption{
+    text-align:center;
+}
+.sourceInfor textarea{
+    /* width:330px;
+    max-width:330px;
+    min-width:330px; */
+    max-height:200px;
+}
+.close{
+	position: absolute;
+	right:5px;top:5px;
+	color:#000;
+	background:#fff;
+	border-radius:10px;
+	overflow:hidden;
+}
+.close:hover{
+	color:#F00;
+}
+.recordBox{
+	position: absolute;
+    right:0;top:0;
+}
+.logRecord{
+    width:450px;
+    border:1px solid #CCC;
+    text-align: center;
+    position:relative;
+     -webkit-box-shadow: 0 0 5px #000;
+    -moz-box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px #000;
+}
+.categoryUl{
+    height:70px !important;
+	color:#555;
+	cursor:pointer;
+}
+.categoryUl li{
+    background:rgba(0,0,0,0.5);
+    color:#FFF;
+    width:50px;
+    border-radius:5px;
+    padding:2px;margin:2px;
+    text-align:center;
+    position: relative;
+    float:left;
+    overflow:hidden;
+    height:25px;
+}
+.categoryUl li i{
+    position: absolute;
+    right:0;top:0;
+    font-size:12px;
+}
+.categoryUl li i:hover{
+    color:#F00;
+}
+
+.logBoard{
+	max-width:440px;
+	min-width:440px;
+	background:none;
+	color:#555;
+	height:100px;
+}
+#scanLevel span i{
+	cursor:pointer;
+	-moz-user-select: none;
+	 -webkit-user-select: none;
+	 -ms-user-select: none;
+	 -khtml-user-select: none;
+	 user-select: none;
+}
+.clearLog{
+	position:absolute;
+	right:10px;top:40px;
+	cursor:pointer;
+}
+.clearLog:hover{
+	color:#F00;
+}

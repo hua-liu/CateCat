@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--  * 用户类
+	 * username		用户名
+	 * password		密码
+	 * phoneNo		手机号码
+	 * email		邮箱地址
+	 * name			真实姓名
+	 * payPassword	用户支付密码
+	 * phoneVerify	手机是否验证
+	 * emailVerify	邮箱是否验证
+	 * head			用户头像		外键
+	 * log			用户日志记录	外键
+	 * role			用户当前角色 	外键-->
+	<class name="cn.catecat.user.bean.User" table="user">
+		<id name="id" type="string" length="40">
+			<generator class="org.hibernate.id.UUIDGenerator"/>
+		</id>
+		<property name="username" type="string" unique="true" length="40"/>
+		<property name="password" type="string" length="40"/>
+		<property name="phoneNo" type="string" unique="true" length="11"/>
+		<property name="email" type="string" unique="true" length="40"/>
+		<property name="name" type="string" length="20"/>
+		<property name="registerTime" type="string" length="40"/>
+		<property name="question" type="string" length="250"/>
+		<property name="presentation" type="string" length="250"/>
+		<property name="payPassword" type="string" length="40"/>
+		<property name="hobby" type="string" length="250"/>
+		<property name="phoneVerify" type="integer" length="40"/>
+		<property name="emailVerify" type="integer" length="40"/>
+		<!-- 用户头像与image表关联  多对一 单向-->
+		<many-to-one name="avatar" lazy="false"
+					 class="cn.catecat.image.bean.Image"
+					 column="avatar_id"></many-to-one>
+		<!-- 用户与用户日志表关联 一对一 单向关联 -->
+		<one-to-one name="log" class="cn.catecat.user.log.bean.UserLog" cascade="all" property-ref="user"></one-to-one>
+		<!-- 用户与用户地址表关联 一对多 单向 -->
+		<set name="userAddresses" cascade="all" lazy="false">
+			<key column="userAddresses_id"/>
+			<one-to-many class="cn.catecat.user.address.bean.UserAddress"/>			
+		</set>
+		<!-- 用户与角色表关联 多对一单向-->
+		<many-to-one name="role"
+					 lazy="false"
+					 class="cn.catecat.jurisdiction.bean.Role"
+					 column="role_id"></many-to-one>
+	</class>
+</hibernate-mapping>

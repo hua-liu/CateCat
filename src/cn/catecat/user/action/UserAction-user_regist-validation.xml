@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- 校验用户名 -->
+	<field name="username">
+		<field-validator type="requiredstring">
+			<message>用户名不能为空！</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">15</param>
+			<param name="minLength">5</param>
+ 			<message>用户名长度必须在${minLength}到${maxLength}之间</message>
+ 		</field-validator>
+	</field>
+	
+	<!-- 校验密码 -->
+	<field name="password">
+		<field-validator type="requiredstring">
+			<message>密码不能为空！</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">20</param>
+			<param name="minLength">6</param>
+ 			<message>密码长度必须在${minLength}到${maxLength}之间</message>
+ 		</field-validator>
+	</field>
+	<!-- <field name="password2">
+		<field-validator type="fieldexpression">
+		指定逻辑表达式
+		<param name="expression"><![CDATA[password2.equals(password)]]></param>
+		<message>两次密码输入不一致</message>
+		</field-validator>
+	</field> -->
+</validators>

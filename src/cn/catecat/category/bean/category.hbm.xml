@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.catecat.category.bean.Category" table="category">
+        <id name="id" type="string" length="20">
+            <generator class="assigned"/><!-- 程序处理 -->
+        </id>
+        <property name="name" type="string" length="120"/>
+        <many-to-one name="parent" column="parent_id" lazy="false"></many-to-one>
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.catecat.jurisdiction.bean.Permission" table="permission">
+        <id name="id" length="40">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" length="40" unique="true"/>
+        <property name="decription" type="string" length="40"/>
+    </class>
+</hibernate-mapping>

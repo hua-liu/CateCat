@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.catecat.combo.bean.Combo" table="combo">
+		<id name="id" type="string" length="40">
+			<generator class="org.hibernate.id.UUIDGenerator"/>
+		</id>
+		<property name="name" length="40"/>
+		<property name="price"/>
+		<property name="about" length="250"/>
+		<set name="cates" lazy="false">	
+      	  	<key column="combo_id"></key><!-- 当前类列名 -->
+        	<many-to-many class="cn.catecat.cate.bean.Cate" column="cate_id" foreign-key="id"/><!-- 外键类列名 -->
+        </set>
+	</class>
+</hibernate-mapping>

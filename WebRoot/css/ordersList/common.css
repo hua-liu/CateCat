@@ -1,0 +1,170 @@
+@charset "utf-8";
+div.ordersList-ordersDetails table {
+	width: 100%;
+	margin-top:-70px;
+	margin-bottom: -28px;
+}
+
+div.ordersList-ordersDetails table th {
+	line-height: 36px;
+	padding: 0px 6px;
+	color: #999999;
+	font-weight: normal;
+	text-align: left;
+	border: solid 1px #e6e4e3;
+	background-color: #fafafa;
+}
+
+div.ordersList-ordersDetails table td {
+	line-height: 20px;
+	padding: 4px;
+	border: solid 1px #f1f1f1;
+}
+
+div.ordersList-ordersDetails table img {
+	width: 60px;
+	height: 60px;
+}
+
+
+div.ordersDetails a {
+	color: #666666;
+	text-decoration: none;
+}
+
+div.ordersDetails a:hover {
+	color: #ff6600;
+	text-decoration: none;
+}
+
+div.ordersDetails img {
+	vertical-align: middle;
+	image-rendering: optimizeQuality;
+	-ms-interpolation-mode: bicubic;
+}
+
+div.ordersDetails table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+/* ---------- Grid ---------- */
+
+div.ordersDetails {
+	width: 1300px;
+	margin: 0px auto;
+	*zoom: 1;
+}
+
+div.ordersDetails:after {
+	height: 0px;
+	display: block;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
+	content: "\0020";
+}
+
+
+div.ordersDetails .span24 {
+	width: 1300px;
+	margin-right: 0px;
+}
+
+/* ---------- Pagination ---------- */
+
+div.ordersList-page {
+	height: 20px;
+	float: right;
+	margin-bottom: 10px;
+}
+
+div.ordersList-page a, div.ordersList-page span {
+	height: 18px;
+	line-height: 18px;
+	display: inline;
+	float: left;
+	margin-left: 3px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	outline: none;
+	blr: expression(this.hideFocus = true);
+}
+
+div.ordersList-page a {
+	padding: 0px 5px;
+	border: 1px solid #cccccc;
+}
+
+div.ordersList-page a:hover {
+	border: 1px solid #fd6d01;
+	text-decoration: none;
+}
+
+div.ordersList-page a.previousPage {
+	width: 18px;
+	padding: 0px;
+	background: url(../ordersList/common.gif) 0px -180px no-repeat;
+}
+
+div.ordersList-page span.previousPage {
+	width: 18px;
+	cursor: default;
+	border: 1px solid #cccccc;
+	background: url(../ordersList/common.gif) -30px -180px no-repeat;
+}
+
+div.ordersList-page a.nextPage {
+	width: 18px;
+	padding: 0px;
+	background: url(../ordersList/common.gif) 0px -210px no-repeat;
+}
+
+div.ordersList-page span.nextPage {
+	width: 18px;
+	cursor: default;
+	border: 1px solid #cccccc;
+	background: url(../ordersList/common.gif) -30px -210px no-repeat;
+}
+
+div.ordersList-page a.firstPage {
+	width: 18px;
+	padding: 0px;
+	background: url(../ordersList/common.gif) -60px -180px no-repeat;
+}
+
+div.ordersList-page span.firstPage {
+	width: 18px;
+	cursor: default;
+	border: 1px solid #cccccc;
+	background: url(../ordersList/common.gif) -90px -180px no-repeat;
+}
+
+div.ordersList-page a.lastPage {
+	width: 18px;
+	padding: 0px;
+	background: url(../ordersList/common.gif) -60px -210px no-repeat;
+}
+
+div.ordersList-page span.lastPage {
+	width: 18px;
+	cursor: default;
+	border: 1px solid #cccccc;
+	background: url(../ordersList/common.gif) -90px -210px no-repeat;
+}
+
+div.ordersList-page .currentPage {
+	padding: 0px 5px;
+	color: #fd6d01!important;
+	font-weight: bold;
+	cursor: default;
+	border: 1px solid #fd6d01;
+	background-color: #ffede1;
+}
+
+div.ordersList-page .pageBreak {
+	padding: 0px 5px;
+	color: #3366cc;
+	cursor: default;
+}

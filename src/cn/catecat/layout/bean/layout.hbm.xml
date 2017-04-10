@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.catecat.layout.bean.Layout" table="layout">
+        <id name="id" length="40">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string" length="40" unique="true"/>
+        <property name="used" column="used"/>
+    </class>
+
+</hibernate-mapping>

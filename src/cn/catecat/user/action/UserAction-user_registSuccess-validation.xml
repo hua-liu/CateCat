@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    
+    <!-- 校验手机 -->
+    <field name="phoneNo">
+    	<field-validator type="regex">
+    		<param name="expression">/^[1][3-8][0-9]{9}$/</param>
+    		<message>手机号码格式不正确</message>
+    	</field-validator>
+    </field>
+    
+    <!-- 校验邮箱 -->
+    <field name="email">
+    	<field-validator type="regex">
+    		<param name="expression">/^[0-9a-zA-Z]+@[0-9a-zA-Z]+[.][0-9a-zA-Z]+$/</param>
+    		<message>邮箱格式不正确</message>
+    	</field-validator>
+    </field>
+    
+    <!-- 校验支付密码 -->
+	<field name="payPassword">
+		<field-validator type="requiredstring">
+			<message>支付密码不能为空！</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">8</param>
+			<param name="minLength">0</param>
+			<message>支付密码过长(8位)</message>
+		</field-validator>
+	</field>
+    
+    <!-- 校验安全问题 -->
+    <field name="question">
+    	<field-validator type="stringlength">
+			<param name="maxLength">200</param>
+			<param name="minLength">0</param>
+ 			<message>答案长度必须在${minLength}到${maxLength}之间</message>
+ 		</field-validator>
+    </field>
+    
+	<!-- 校验姓名 -->
+	<field name="name">
+		<field-validator type="stringlength">
+			<param name="maxLength">40</param>
+			<param name="minLength">0</param>
+			<message>名字过长</message>
+		</field-validator>
+	</field>
+	
+	<!-- 校验自我介绍 -->	
+	<field name="presentation">
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<param name="minLength">0</param>
+			<message>自我介绍过长</message>
+		</field-validator>
+	</field>
+</validators>

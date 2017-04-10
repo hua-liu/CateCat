@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="D:\\DATA\\CATECAT\\temp" />
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="index" class="cn.catecat.cate.action.CateAction" method="index">
+			<result>WEB-INF/views/front/index.jsp</result>
+		</action>
+		<action name="admin">
+			<result type="chain">adminUi_admin</result>
+		</action>
+		<action name="cate-*" class="cn.catecat.cate.action.CateAction" method="{1}">
+			<result>WEB-INF/views/front/{1}.jsp</result>
+		</action>
+		<action name="list" class="cn.catecat.cate.action.CateAction" method="detailToList">
+			<result type="redirectAction">cate-list</result>
+		</action>
+		<action name="specialMange" class="cn.catecat.cate.action.CateAction" method="specialShowMange">
+			<result>WEB-INF/views/admin/cateSpecialManage.jsp</result>
+		</action>
+		<action name="registSuccess" class="cn.catecat.user.action.UserAction" method="registSuccess">
+			<result>WEB-INF/views/front/registerSuccess.jsp</result>
+			<result name="login" type="redirectAction">login</result>
+		</action>
+		
+		<!-- 用户跳转 -->
+		<action name="user_*" class="cn.catecat.user.action.UserAction" method="{1}">
+			<result name="input">WEB-INF/views/front/register.jsp</result>
+			<result name="registPage">WEB-INF/views/front/register.jsp</result>
+			<result name="indexPage" type="redirectAction">index</result>
+			<result name="registSuccess" type="redirectAction">registSuccess</result>
+			<result name="loginPage">WEB-INF/views/front/login.jsp</result>
+			<result name="quit" type="redirectAction">index</result>
+		</action>
+		<!-- 我的收藏 -->
+		<action name="favlist" class="cn.catecat.orders.action.FavAction" method="favlist">
+			<result>WEB-INF/views/front/favlist.jsp</result>
+		</action>
+		<!-- 购物车 -->
+		<action name="cart_*" class="cn.catecat.orders.action.CartAction" method="{1}">
+			<result name="success">WEB-INF/views/front/cart.jsp</result>
+			<result name="cartPage">WEB-INF/views/front/cart.jsp</result>
+		</action>
+		<!-- 订单 -->
+		<action name="orders_*" class="cn.catecat.orders.action.OrdersAction" method="{1}">
+			<result name="ordersPage">WEB-INF/views/front/orders.jsp</result>
+		</action>
+		<!-- 我的订单 -->
+		<action name="ordersList_*" class="cn.catecat.orders.action.OrdersListAction" method="{1}">
+			<result name="success">WEB-INF/views/front/ordersList.jsp</result>
+			<result name="myOrdersPage" type="redirectAction">ordersList_myOrdersPage?page=1</result>
+		</action>
+		<action name="ordersList" class="cn.catecat.orders.action.OrdersListAction" method="myOrdersPage">
+			<result type="redirectAction">ordersList_myOrdersPage?page=1</result>
+		</action>
+		<!-- 图片处理 -->
+		<action name="img_*" class="cn.catecat.image.action.ImageAction" method="{1}">
+			<result name="stream" type="stream">       
+		        <param name="contentType">image/jpeg</param>       
+		        <param name="inputName">inputStream</param>       
+	    	</result>    
+	    	<result>WEB-INF/views/admin/{3}.jsp</result>
+		</action>
+		<!-- 通用页面跳转 -->
+		<action name="admin_*_*_*" class="cn.catecat.{1}.action.{2}Action" method="{3}">
+	    	<result>WEB-INF/views/admin/{3}.jsp</result>
+		</action>
+		<action name="adminUi_*">
+			<result>WEB-INF/views/admin/{1}.jsp</result>
+		</action>
+		<action name="*">
+			<result>WEB-INF/views/front/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="json" namespace="/json" extends="json-default">
+	<!-- 配置全局json结果处理 -->
+		<global-results>
+			<!-- 返回 单一结果-->
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+			<!--返回集合结果  -->
+			<result name="all" type="json">
+				<param name="root">list</param>
+			</result>
+			<!--返回分页结果  -->
+			<result name="list" type="json">
+				<param name="root">dataResponse</param>
+			</result>
+			<!-- <result name="error" type="json">
+				<param name="root">result</param>
+			</result> -->
+		</global-results>
+		<!-- 分类处理 -->
+		<action name="category_*" class="cn.catecat.category.action.CategoryAction" method="{1}"></action>
+		<!-- 图片处理 -->
+		<action name="img_*" class="cn.catecat.image.action.ImageAction" method="{1}"></action>
+		<!-- 美食处理 -->
+		<action name="cate_*" class="cn.catecat.cate.action.CateAction" method="{1}"></action>
+		<!-- 扫描美食处理 -->
+		<action name="scancate" class="cn.catecat.cate.action.ScanCateAction" method="scan"></action>
+		<!-- 分页处理 -->
+		<action name="list_*_*_*" class="cn.catecat.{1}.action.{2}ListAction" method="{3}">
+			<result name="specialResponse" type="json">
+				<param name="root">specialResponse</param>
+			</result>
+		</action>
+		<!-- 任务处理 -->
+		<action name="mission_*" class="cn.catecat.cate.action.CateMissionAction" method="{1}"></action>
+		<!-- 用户处理 -->
+		<action name="user_*" class="cn.catecat.user.action.UserAction" method="{1}"></action>
+		<!-- 状态处理 -->
+		<action name="status_*" class="cn.catecat.status.action.StatusAction" method="{1}"></action>
+		<!-- 购物车处理 -->
+		<action name="cart_*" class="cn.catecat.orders.action.CartAction" method="{1}"></action>
+		<!--订单处理 -->
+		<action name="orders_*" class="cn.catecat.orders.action.OrdersAction" method="{1}"></action>
+		<!--布局处理 -->
+		<action name="layout_*" class="cn.catecat.layout.action.LayoutAction" method="{1}"></action>
+		<!--套餐处理 -->
+		<action name="combo_*" class="cn.catecat.combo.action.ComboAction" method="{1}"></action>
+		<!-- 我的订单处理 -->
+		<action name="ordersList_*" class="cn.catecat.orders.action.OrdersListAction" method="{1}"></action>
+		<action name="ordersManageList" class="cn.catecat.orders.action.OrdersListAction" method="ordersManage">
+			<result name="ordersManagePageBean" type="json">
+				<param name="root">pageBean</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>
