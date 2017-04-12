@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
@@ -74,15 +74,16 @@
 	    	<result>WEB-INF/views/admin/{3}.jsp</result>
 		</action>
 		<!-- 后台 -->
+		<!-- 通用页面跳转 -->
+		<action name="admin_*_*_*" class="cn.catecat.{1}.action.{2}Action" method="{3}">
+	    	<result>WEB-INF/views/admin/{3}.jsp</result>
+		</action>
 		<action name="admin_*" class="cn.catecat.user.action.UserAction" method="{1}">
 	    	<result name="admin" type="redirectAction">adminUi_admin</result>
 	    	<result name="login" type="redirectAction">adminUi_login</result>
 		</action>
 		
-		<!-- 通用页面跳转 -->
-		<action name="admin_*_*_*" class="cn.catecat.{1}.action.{2}Action" method="{3}">
-	    	<result>WEB-INF/views/admin/{3}.jsp</result>
-		</action>
+		
 		<action name="adminUi_*">
 			<result>WEB-INF/views/admin/{1}.jsp</result>
 		</action>
