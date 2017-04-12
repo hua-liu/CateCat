@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.cate.bean.Cate;
 import cn.catecat.cate.bean.SpecialShowCate;
 import cn.catecat.cate.dto.CateDetails;
@@ -46,6 +47,10 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	private List<Status> status;
 	private SpecialShowCate ssCate = new SpecialShowCate();
 	private String sidx;
+	private String reload;
+	public void setReload(String reload) {
+		this.reload = reload;
+	}
 	public void setSidx(String sidx) {
 		this.sidx = sidx;
 	}
@@ -89,6 +94,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 添加美食
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin","AddCate","UpdateCate"})
 	public String addOrUpdate(){
 		String skey = (String) ActionContext.getContext().getSession().get("key");
 		try{
@@ -119,6 +125,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 删除美食
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin","DeleteCate"})
 	public String delete(){
 		try{
 			int num = cateService.deleteCate(cate.getId());
@@ -143,6 +150,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 强制上线与下线
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin","UpdateCate"})
 	public String onlineOrOffline(){
 		try{
 			int num = cateService.onOrOffCate(cate.getId(),type);
@@ -164,7 +172,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 		return SUCCESS;
 	}
 	/**
-	 * 检查用户名是否已存在
+	 * 检查名是否已存在
 	 * @return	存在返回true，不存在返回false
 	 */
 	public String checkname(){
@@ -176,6 +184,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 前台分类显示页面
 	 * @return
 	 */
+	
 	public String list(){
 		@SuppressWarnings("unchecked")
 		List<CategoryDto> categorys = (List<CategoryDto>) ActionContext.getContext().getApplication().get("categorys");
@@ -242,6 +251,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 添加与更新特殊展示美食
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin","UpdateCate"})
 	public String updateSpecial(){
 		try{
 			globalService.saveOrUpdate(ssCate);
@@ -256,6 +266,8 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	 * 删除特殊展示美食
 	 * @return
 	 */
+	
+	@Jurisdiction({"BackgroundLogin","DeleteCate"})
 	public String deleteSpecial(){
 		try{
 			int num = cateService.deleteSpecialCate(ssCate.getId());
@@ -320,13 +332,13 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 	@SuppressWarnings("unchecked")
 	public String index(){
 		List<CategoryDto> categorys = (List<CategoryDto>) ActionContext.getContext().getApplication().get("categorys");
-		if(categorys==null||categorys!=null&&categorys.size()<1){
+		if(categorys==null||categorys!=null&&categorys.size()<1||reload!=null){
 			categorys = categoryService.getAllCategory();
 			ActionContext.getContext().getApplication().put("categorys", categorys);
 		}
 		//加载主页特殊展示
 		List<SpecialShowCate> cates = (List<SpecialShowCate>) ActionContext.getContext().getApplication().get("specialCate");
-		if(cates==null||cates!=null&&cates.size()<1){
+		if(cates==null||cates!=null&&cates.size()<1||reload!=null){
 			cates = cateService.getSpecialCates();
 			ActionContext.getContext().getApplication().put("specialCate", cates);
 		}
@@ -337,7 +349,7 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 		String currentDate = df.format(new Date());
 		String countdownDate =null;
 		if(countdownCateDate!=null) countdownDate = df.format(countdownCateDate);
-		if(countdownCate==null||!currentDate.equals(countdownDate)){
+		if(countdownCate==null||!currentDate.equals(countdownDate)||reload!=null){
 			List<Cate> list = cateService.getRandCate(1);
 			if(list!=null&&list.size()>0)countdownCate = list.get(0);
 			ActionContext.getContext().getApplication().put("countdownCate", countdownCate);
@@ -350,21 +362,21 @@ public class CateAction extends ActionSupport implements ModelDriven<Cate>{
 		currentDate = df.format(new Date());
 		String updateDate =null;
 		if(cateDate!=null) updateDate = df.format(cateDate);
-		if(activeCate==null||activeCate!=null&&activeCate.size()<1||!currentDate.equals(updateDate)){
+		if(activeCate==null||activeCate!=null&&activeCate.size()<1||!currentDate.equals(updateDate)||reload!=null){
 			activeCate = cateService.getActiveCate(8);
 			ActionContext.getContext().getApplication().put("activeCate", activeCate);
 			ActionContext.getContext().getApplication().put("cateDate", new Date());
 		}
 		//最新商品(每小时更新一次)
 		List<Cate> newCate = (List<Cate>) ActionContext.getContext().getApplication().get("newCate");
-		if(newCate==null||activeCate!=null&&activeCate.size()<1||!currentDate.equals(updateDate)){
+		if(newCate==null||activeCate!=null&&activeCate.size()<1||!currentDate.equals(updateDate)||reload!=null){
 			newCate = cateService.getNewCate(2);
 			ActionContext.getContext().getApplication().put("newCate", newCate);
 			ActionContext.getContext().getApplication().put("cateDate", new Date());
 		}
 		//本店推荐随机8个(每小时更新一次)
 		List<Cate> recCate = (List<Cate>) ActionContext.getContext().getApplication().get("recCate");
-		if(recCate==null||recCate!=null&&recCate.size()<1||!currentDate.equals(updateDate)){
+		if(recCate==null||recCate!=null&&recCate.size()<1||!currentDate.equals(updateDate)||reload!=null){
 			recCate = cateService.getRandCate(8);
 			ActionContext.getContext().getApplication().put("recCate", recCate);
 			ActionContext.getContext().getApplication().put("cateDate", new Date());

@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.cate.bean.Cate;
 import cn.catecat.cate.bean.SpecialShowCate;
 import cn.catecat.cate.dto.CateSearchRequest;
@@ -55,6 +56,7 @@ public class CateListAction extends ActionSupport implements ModelDriven<DataReq
 	 * 后台美食数据列表
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin"})
 	public String bgm(){
 		dataResponse = cateService.list_bgm(dataRequest);
 		return "list";

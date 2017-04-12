@@ -266,7 +266,7 @@ img.img.active {
 	            		parent.layer.msg('添加失败：'+data.cause, {icon : 2});
 	            	}
 	            },    
-	            error: function (returndata) {
+	            error: function (data) {
 	            	parent.layer.msg('发生错误：'+data.cause, {icon : 2});
 	            }  
 	        });  

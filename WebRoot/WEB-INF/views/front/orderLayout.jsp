@@ -18,6 +18,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<link rel="shortcut icon" href="favicon.ico">
 <link href="css/plugins/order/layoutState.css" rel="stylesheet">
  <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
  <link href="css/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">

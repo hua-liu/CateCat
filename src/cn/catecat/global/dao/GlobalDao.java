@@ -102,4 +102,13 @@ public interface GlobalDao {
 	 * @param layouts
 	 */
 	<T> void updateMany(List<T> ts);
+	/**
+	 * 更新多个对象字段
+	 * @param cls
+	 * @param criteria
+	 * @param ids
+	 * @param value
+	 * @return
+	 */
+	<T> Integer updateManyByFields(Class<T> cls,String criteria,String[] ids,Object[] value);
 }

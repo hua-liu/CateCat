@@ -12,6 +12,7 @@
 <base href="<%=basePath%>">
 
 <title>美食猫</title>
+<link rel="shortcut icon" href="favicon.ico">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">

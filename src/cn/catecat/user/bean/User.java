@@ -1,13 +1,13 @@
 package cn.catecat.user.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.management.relation.Role;
+import javax.persistence.Table;
 
 import cn.catecat.image.bean.Image;
+import cn.catecat.jurisdiction.bean.Role;
 import cn.catecat.user.address.bean.UserAddress;
 import cn.catecat.user.log.bean.UserLog;
 
@@ -16,6 +16,7 @@ import cn.catecat.user.log.bean.UserLog;
  * @author 钟思平
  *
  */
+@Table(name="user")
 public class User implements Serializable{
 
 	/**

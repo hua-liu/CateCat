@@ -5,7 +5,7 @@
 $(function() {
 	$.jgrid.defaults.styleUI = 'Bootstrap';
 	$("#table_list").jqGrid({
-		url : "json/list/user",
+		url : "json/list_user_User_list",
 		contentType : 'application/json',
 		mtype : "post",
 		datatype : "json",
@@ -22,7 +22,7 @@ $(function() {
 		rownumWidth : 40,
 		rowNum : 15,
 		rowList : [ 10, 15, 20, 30 ],
-		colNames : [ 'id', '用户名', '手机号码', '邮箱地址', 'VIP等级','一句话描述' ],
+		colNames : [ 'id', '用户名', '手机号码', '邮箱地址', '余额','最后登陆时间' ],
 		colModel : [
 				{
 					name : 'id',
@@ -65,16 +65,16 @@ $(function() {
 					}
 				},
 				{
-					name : 'vipLevel',
-					index : 'vipLevel',
+					name : 'log.money',
+					index : 'log.money',
 					width : 50,
 					align : "center",
 					sorttype : "int",
 					search : false
 				},
 				{
-					name : 'presentation',
-					index : 'presentation',
+					name : 'log.lastLoginTime',
+					index : 'log.lastLoginTime',
 					search : true,
 					searchoptions : {
 						sopt : [ 'cn', 'nc' ]
@@ -228,7 +228,7 @@ function rowIdFmatter(cellvalue, options, rowObject) {
 	return options.rowId;
 }
 function deleteData(ids) {
-	$.post("json/deleteUser", "id=" + ids, function(data) {
+	$.post("json/list_user_User_deleteUser", "id=" + ids, function(data) {
 		data = eval("(" + data + ")");
 		if (data.message && data.num > 0) {
 			if (ids.toString().indexOf(",") != -1) {

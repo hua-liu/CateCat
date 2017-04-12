@@ -68,5 +68,7 @@
 			<tx:method name="*" />
 		</tx:attributes>
 	</tx:advice>
+		<!-- aop配置 -->
+	<import resource="spring-aop.xml"/>
 	<bean id="UserFilter" class="cn.catecat.user.userFilter.UserFilter"/>  
 </beans>

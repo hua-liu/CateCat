@@ -246,6 +246,12 @@ function tooltipUtil(el,title){
 }
 function deleteData(ids) {
 	$.post("json/cate_delete", "id=" + ids, function(data) {
+		if(data==''){
+			parent.layer.msg('删除失败,该美食在其它地方被引用', {
+				icon : 2
+			});
+			return;
+		}
 		if(!(data instanceof Object))data = eval("(" + data + ")");
 		if (data.result && data.num > 0) {
 			if (ids.toString().indexOf(",") != -1) {

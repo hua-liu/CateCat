@@ -18,6 +18,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/plugins/zoom/ShopShow.css" type="text/css" />
 <link rel="stylesheet" href="css/plugins/zoom/MagicZoom.css" type="text/css" />
 <style type="text/css">

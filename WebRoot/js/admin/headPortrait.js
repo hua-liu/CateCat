@@ -138,6 +138,12 @@ function tooltipUtil(el,title){
 }
 function deleteData(ids) {
 	$.post("json/img_deleteImg", "id=" + ids, function(data) {
+		if(data==''){
+			parent.layer.msg('删除失败:头像正在被使用', {
+				icon : 2
+			});
+			return;
+		}
 		data = eval("(" + data + ")");
 		if (data.result) {
 			parent.layer.msg('操作结果:成功 ' + data.success + ' 个记录,失败 '+data.failure+' 个记录', {
@@ -150,5 +156,9 @@ function deleteData(ids) {
 				icon : 2
 			});
 		}
+	}).error(function(){
+		parent.layer.msg('删除失败:头像正在被使用', {
+			icon : 2
+		});
 	})
 }

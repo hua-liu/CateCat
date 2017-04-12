@@ -81,6 +81,7 @@ function confirmOrders(){
 				}
 			},"json");
 		});
+		$(".showSweetAlert fieldset input").attr("type","password")
 	});
 }
 

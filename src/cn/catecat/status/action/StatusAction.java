@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.global.dto.DataRequest;
 import cn.catecat.global.dto.DataResponse;
 import cn.catecat.global.service.dao.GlobalService;
@@ -62,6 +63,7 @@ public class StatusAction extends ActionSupport implements ModelDriven<DataReque
 		this.status = status;
 	}
 	@Autowired private GlobalService globalService;
+	@Jurisdiction({"BackgroundLogin","SelectState","StateManage"})
 	public String delete(){
 		try{
 			if(status.getId()==null){
@@ -75,10 +77,12 @@ public class StatusAction extends ActionSupport implements ModelDriven<DataReque
 		}
 		return SUCCESS;
 	}
+	@Jurisdiction({"BackgroundLogin","SelectState"})
 	public String list(){
 		dataResponse = globalService.list(Status.class, dataRequest);
 		return "list";
 	}
+	@Jurisdiction({"BackgroundLogin","SelectState","StateManage"})
 	public String update(){
 		try{
 			if(status.getId()==null||status.getId()!=null&&status.getId().trim().equals("")){

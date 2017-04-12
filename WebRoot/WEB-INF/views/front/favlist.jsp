@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="shortcut icon" href="favicon.ico">
 <title>我的收藏</title>
 <link rel="stylesheet" href="css/favList/base.css">
 <style type="text/css">

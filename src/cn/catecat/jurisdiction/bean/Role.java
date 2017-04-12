@@ -26,6 +26,9 @@ public class Role implements Serializable {
 	private int level;
 	private int parentLevel;
 	private Set<Permission> permissions = new HashSet<Permission>();
+	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name="uuid",strategy="uuid2")
 	public String getId() {
 		return id;
 	}
@@ -38,6 +41,7 @@ public class Role implements Serializable {
 	public void setParentLevel(int parentLevel) {
 		this.parentLevel = parentLevel;
 	}
+	@Column(length=20,unique=true)
 	public String getName() {
 		return name;
 	}
@@ -51,6 +55,7 @@ public class Role implements Serializable {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	
 	public Set<Permission> getPermissions() {
 		return permissions;
 	}

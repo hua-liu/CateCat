@@ -57,6 +57,30 @@
 	color: #F00;
 	cursor: pointer;
 }
+.b-logo {
+  display: inline-block;
+}
+.b-logo a {
+  display: inline-block;
+}
+.b-logo a span {
+  display: inline-block;
+}
+.b-logo a span:first-child {
+  font-size: 26px;
+  font-weight: bold;
+}
+.b-logo a span:last-child {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 10px;
+}
+.b-logo span:first-child:first-letter {
+  color: #01a664;
+}
+.b-header-main.style-2 .b-logo span:last-child {
+    color: #cccccc;
+}
 </style>
 </head>
 
@@ -75,27 +99,25 @@
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 							class="clear"> <span class="block m-t-xs"
 								style="font-size:20px;">
-									<!-- <img src="img/logo.png" style="width:150px"> -->
 									<div class="b-logo">
-										<a href="admin" style="font-size:20px"> <span>CateCat</span>
-											<br> <span>love</span>
+										<a href="admin"> <span>CateCat</span> <br> <span>love</span>
 										</a>
 									</div>
 							</span>
 						</span>
 						</a>
 						<div>
-							<span style="float:left;line-height:30px;">欢迎您:</span>
+						<br/>
 							<div
-								style='font-size:20px;color:#869FB1;max-width:85px;overflow:hidden;height:30px;float:left'
-								title="${user.username}">${user.username}</div>
-							<a href="logout" class="logout"
-								style="float:left;line-height:30px;">退出</a>
+								style='font-size:15px;color:#869FB1;overflow:hidden;height:30px;'
+								title="${user.role.name}">身份:${user.role.name}</div>
+							<div
+								style='font-size:15px;color:#869FB1;overflow:hidden;height:30px;'
+								title="${user.username}">用户:<span style='font-size:20px;'>${user.username}<span></span></div>
+							<a href="admin_logoutAdmin" class="logout"
+								style="float:right;font-size:18px;line-height:30px;">退出</a>
 						</div>
 						<span style="clear:both;"></span>
-					</div>
-					<div class="logo-element" style="background:#1C2B36;">
-						<img src="img/logo-min.png">
 					</div>
 				</li>
 				<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
@@ -118,7 +140,7 @@
 				<li><a href="#"><i class="fa fa-users"></i> <span
 						class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a class="J_menuItem" href="userManage">用户管理</a></li>
+						<li><a class="J_menuItem" href="adminUi_userManage">用户管理</a></li>
 						<li><a class="J_menuItem" href="adminUi_defaultHeadPortrait">默认头像管理</a>
 						</li>
 					</ul></li>
@@ -145,7 +167,7 @@
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="glyphicon glyphicon-warning-sign"></i>
+				<li><a href="#"><i class="glyphicon glyphicon-tag"></i>
 						<span class="nav-label">预约管理</span><span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a class="J_menuItem" href="adminUi_storeLayout">店铺布局</a></li>
@@ -175,9 +197,9 @@
                     <li>
                         <a href="#"><i class="fa fa-hand-paper-o"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem"  href="manager">管理员维护</a>
+                            <li><a class="J_menuItem"  href="jurisdiction_manager">管理员维护</a>
                             </li>
-                            <li><a class="J_menuItem"  href="adminUi_role">角色维护</a>
+                            <li><a class="J_menuItem"  href="jurisdiction_role">角色维护</a>
                             </li>
                             <li><a class="J_menuItem"  href="adminUi_permission">查看权限</a>
                             </li>

@@ -15,6 +15,8 @@ public class Permission implements Comparable<Permission>,Serializable{
 	private String name;
 	private String decription;
 	public Permission(){}
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}

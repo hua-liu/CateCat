@@ -7,12 +7,19 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.multipart.saveDir" value="D:\\DATA\\CATECAT\\temp" />
+	<!--交由Spring作为管理 ，使spring可以使用Aop拦截  -->
+	<constant name="struts.objectFactory" value="spring" />  
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>  
 	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="home">/WEB-INF/views/admin/home.jsp</result>
+		</global-results>
 		<action name="index" class="cn.catecat.cate.action.CateAction" method="index">
 			<result>WEB-INF/views/front/index.jsp</result>
 		</action>
-		<action name="admin">
+		<action name="admin" class="cn.catecat.jurisdiction.action.JurisdictionAction" method="admin">
 			<result type="chain">adminUi_admin</result>
+			<result name="login">WEB-INF/views/admin/login.jsp</result>
 		</action>
 		<action name="cate-*" class="cn.catecat.cate.action.CateAction" method="{1}">
 			<result>WEB-INF/views/front/{1}.jsp</result>
@@ -66,6 +73,12 @@
 	    	</result>    
 	    	<result>WEB-INF/views/admin/{3}.jsp</result>
 		</action>
+		<!-- 后台 -->
+		<action name="admin_*" class="cn.catecat.user.action.UserAction" method="{1}">
+	    	<result name="admin" type="redirectAction">adminUi_admin</result>
+	    	<result name="login" type="redirectAction">adminUi_login</result>
+		</action>
+		
 		<!-- 通用页面跳转 -->
 		<action name="admin_*_*_*" class="cn.catecat.{1}.action.{2}Action" method="{3}">
 	    	<result>WEB-INF/views/admin/{3}.jsp</result>
@@ -73,6 +86,10 @@
 		<action name="adminUi_*">
 			<result>WEB-INF/views/admin/{1}.jsp</result>
 		</action>
+		<action name="jurisdiction_*" class="cn.catecat.jurisdiction.action.JurisdictionAction" method="{1}">
+			<result name="{1}">WEB-INF/views/admin/{1}.jsp</result>
+		</action>
+		
 		<action name="*">
 			<result>WEB-INF/views/front/{1}.jsp</result>
 		</action>
@@ -93,7 +110,7 @@
 				<param name="root">dataResponse</param>
 			</result>
 			<!-- <result name="error" type="json">
-				<param name="root">result</param>
+				<param name="root">"{'message',}"</param>
 			</result> -->
 		</global-results>
 		<!-- 分类处理 -->
@@ -131,6 +148,7 @@
 				<param name="root">pageBean</param>
 			</result>
 		</action>
-		
+		<!-- 权限处理 -->
+		<action name="jurisdiction_*" class="cn.catecat.jurisdiction.action.JurisdictionAction" method="{1}"></action>
 	</package>
 </struts>

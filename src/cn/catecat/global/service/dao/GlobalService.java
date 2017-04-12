@@ -94,4 +94,13 @@ public interface GlobalService {
 	 * @param layouts
 	 */
 	<T> void updateMany(List<T> ts);
+	/**
+	 * 更新字段
+	 * @param class1
+	 * @param ids
+	 * @param name
+	 * @param value
+	 * @return
+	 */
+	<T> Integer updateManyByFields(Class<T> class1,String[] ids,String[] name,Object[] value);
 }

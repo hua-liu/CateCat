@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>权限查看</title>
+<title>资源管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -27,7 +27,7 @@
 <!-- jqgrid-->
 <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
 <!-- Sweet Alert -->
-<!-- Sweet Alert -->
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <style type="text/css">
 </style>
 </head>
@@ -50,92 +50,18 @@
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
 <!-- jqGrid -->
 <script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
 <script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
 <!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+<!-- Sweet alert -->
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <!-- Bootstrap-Treeview plugin javascript -->
+<script src="js/admin/multipleChoice.js" type="text/javascript"></script>
+<script src="js/admin/userManage.js" type="text/javascript"></script>
 <script type="text/javascript">
-	/**
- * 六画
- * 权限查看
- */
-$(function() {
-	$.jgrid.defaults.styleUI = 'Bootstrap';
-	$("#table_list").jqGrid({
-		url : "json/jurisdiction_listpermission",
-		contentType : 'application/json',
-		mtype : "post",
-		datatype : "json",
-		prmNames : {
-			search : "search"
-		},
-		jsonReader : {
-			sourcedata : "sourcedata"
-		},
-		height : "auto",
-		autowidth : true,
-		shrinkToFit : true,
-		rownumbers : true,
-		rownumWidth : 40,
-		rowNum : 15,
-		rowList : [ 10, 15, 20, 30 ],
-		colNames : [ 'id', '权限名称', '权限描述'],
-		colModel : [
-				{
-					name : 'id',
-					index : 'id',
-					hidden : true
-				},{
-					name : 'name',
-					index : 'name',
-					editable : true,
-					width : 50,
-					sorttype : "string",
-					search : true,
-					searchoptions : {
-					sopt : [ 'eq', 'ne', 'bw', 'bn', 'ew', 'en',
-							'cn', 'nc' ]
-					}
-				},{
-					name : 'decription',
-					index : 'decription',
-					editable : true,
-					width : 50,
-					sorttype : "string",
-					search : true,
-					searchoptions : {
-					sopt : [ 'eq', 'ne', 'bw', 'bn', 'ew', 'en',
-								'cn', 'nc' ]
-					}
-				}],
-		pager : "#pager_list",
-		viewrecords : true,
-		caption : "权限查看",
-		add : true,
-		edit : true,
-		addtext : 'Add',
-		edittext : 'Edit',
-		hidegrid : true
-	});
-	// Add selection
-	$("#table_list").setSelection(4, true);
-
-	// Setup buttons
-	$("#table_list").jqGrid('navGrid', '#pager_list', {
-		edit : false,
-		add : false,
-		del : false,
-		search : true
-	}, {
-		height : 200,
-		reloadAfterSubmit : true
-	});
-	// Add responsive to jqGrid
-	$(window).bind('resize', function() {
-		var width = $('.jqGrid_wrapper').width();
-		$('#table_list').setGridWidth(width);
-	});
-})
+	var userId ="${sessionScope.user.id}";
 </script>
 </html>

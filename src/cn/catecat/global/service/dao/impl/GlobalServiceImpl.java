@@ -103,5 +103,12 @@ public class GlobalServiceImpl implements GlobalService{
 	public <T> void updateMany(List<T> ts) {
 		global.updateMany(ts);
 	}
-
+	@Override
+	public <T> Integer updateManyByFields(Class<T> cls,String[] ids,String[] name, Object[] value) {
+		StringBuffer criteria = new StringBuffer();
+		for(int i=0;i<name.length;i++){
+			criteria.append(name[i]+"=?"+(i!=name.length-1?",":""));
+		}
+		return global.updateManyByFields(cls, criteria.toString(), ids,value);
+	}
 }

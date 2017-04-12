@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -110,5 +111,14 @@ public class GlobalImpl implements GlobalDao {
 			sessionFactory.getCurrentSession().update(t);
 		}
 		sessionFactory.getCurrentSession().flush();
+	}
+	@Override
+	public <T> Integer updateManyByFields(Class<T> cls,String criteria,String[] ids,Object[] value) {
+		Table table = cls.getAnnotation(Table.class);
+		NativeQuery nq = sessionFactory.getCurrentSession().createNativeQuery("update "+table.name()+" set "+criteria+" where id in(:id)");
+		for(int i=0;i<value.length;i++){
+			nq.setParameter(++i, value[--i]);
+		}
+		return nq.setParameterList("id", ids).executeUpdate();
 	}
 }

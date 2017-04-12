@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.category.bean.Category;
 import cn.catecat.category.dto.CategoryDto;
 import cn.catecat.category.service.dao.CategoryService;
@@ -64,6 +65,7 @@ public class CategoryAction extends ActionSupport implements RequestAware,ModelD
 	/**
 	 * 添加分类
 	 */
+	@Jurisdiction({"BackgroundLogin","AddCategory"})
 	public String add(){
 		try{
 			category.setId(System.currentTimeMillis()+"");
@@ -79,6 +81,7 @@ public class CategoryAction extends ActionSupport implements RequestAware,ModelD
 	/**
 	 * 删除分类
 	 */
+	@Jurisdiction({"BackgroundLogin","DeleteCategory"})
 	public String delete(){
 		try{
 			if(category.getId()==null){
@@ -96,6 +99,7 @@ public class CategoryAction extends ActionSupport implements RequestAware,ModelD
 	/**
 	 * 更新分类
 	 */
+	@Jurisdiction({"BackgroundLogin","UpdateCategory"})
 	public String update(){
 		try{
 			categoryService.updateCategory(category);

@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>资源管理</title>
+<title>角色管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -164,7 +164,7 @@
 $(function() {
 	$.jgrid.defaults.styleUI = 'Bootstrap';
 	$("#table_list").jqGrid({
-		url : "json/list_jurisdiction_Role_list",
+		url : "json/jurisdiction_listrole",
 		contentType : 'application/json',
 		mtype : "post",
 		datatype : "json",
@@ -368,7 +368,7 @@ $(function() {
 		$("*").popover("destroy")
 	})
 })
-var currentLevel=${user.role.level};
+var currentLevel=${sessionScope.user.role.level};
 //提示工具
 function tooltipUtil(el,title){
 	$(el).attr("title",title);
@@ -382,7 +382,7 @@ function rowIdFmatter(cellvalue, options, rowObject) {
 	return options.rowId;
 }
 function deleteData(ids) {
-	$.post("json/deleteRole", "id=" + ids, function(data) {
+	$.post("json/jurisdiction_deleteRole", "id=" + ids, function(data) {
 		data = eval("(" + data + ")");
 		if (data.message && data.num > 0) {
 			if (ids.toString().indexOf(",") != -1) {
@@ -442,12 +442,12 @@ function suerAddRole(){
 }
 function addRole(value){
 	var id = $("#roleId").val();
-	var data = "name="+value+"&level="+$("#level-control").attr("data-original-title")+(id!=''?'&id='+id:'');
+	var data = "role.name="+value+"&level="+$("#level-control").attr("data-original-title")+(id!=''?'&id='+id:'');
 	var permissionInput = $("#add_permission input:checked");
 	for(var i=0;i<permissionInput.length;i++){
 		data += "&permissions="+permissionInput[i].value;
 	}
-	$.post("json/addRole",data,function(data){
+	$.post("json/jurisdiction_addRole",data,function(data){
 		if(data!=null){
 			data = eval("("+data+")");
 			if(data.message){
@@ -499,7 +499,7 @@ function addRoleInputVerify(el){
 }
 //验证角色名是否已存在 
 function verifyRoleName(name,el){
-	$.post("json/verifyRoleName", "name=" + name,function(data) {
+	$.post("json/jurisdiction_verifyRoleName", "name=" + name,function(data) {
 			if (data != null) {
 			data = eval("(" + data + ")");
 			if(data.message){
@@ -545,7 +545,7 @@ function levelFormat(cellvalue, options, rowObject) {
 function fillSourceData(obj) {
 	$("#roleId").val(obj.id);
 	$("#addRole_input").val(obj.name);
-	var level = parseInt(obj.level.toString().substr(0,obj.level.toString().indexOf("(")))-${user.role.level}-1;
+	var level = parseInt(obj.level.toString().substr(0,obj.level.toString().indexOf("(")))-currentLevel-1;
 	$("#level-control").css("left",level).attr("data-original-title",level);
 	var lis = $("input[name=addcheckboxOptions]");
 	for(var i=0;i<lis.length;i++){

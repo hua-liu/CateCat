@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.global.util.Conversion;
 import cn.catecat.orders.bean.Orders;
 import cn.catecat.orders.service.dao.OrdersService;
@@ -198,6 +199,7 @@ public class OrdersAction extends ActionSupport implements ModelDriven<Orders>{
 	}
 	
 	//后台发货处理
+	@Jurisdiction({"BackgroundLogin","SelectOrder","OrderManage"})
 	public String backstageDeliverOrders(){
 		if(ordersId != null){
 			Orders orders = ordersService.findOrdersByOrdersId(ordersId);

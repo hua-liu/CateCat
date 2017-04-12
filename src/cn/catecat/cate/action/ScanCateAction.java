@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.cate.bean.Cate;
 import cn.catecat.cate.dto.ScanForm;
 import cn.catecat.cate.service.dao.CateService;
@@ -33,6 +34,7 @@ public class ScanCateAction extends ActionSupport implements ModelDriven<ScanFor
 	 * 批量扫描美食信息
 	 * @return
 	 */
+	@Jurisdiction({"BackgroundLogin","LocalScan"})
 	public String scan(){
 		try{
 			if(scanForm==null){

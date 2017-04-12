@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.catecat.annotation.Jurisdiction;
 import cn.catecat.cate.dto.MissionBean;
 import cn.catecat.cate.service.dao.CateService;
 import cn.catecat.global.socket.CommServlet;
@@ -35,6 +36,7 @@ public class CateMissionAction extends ActionSupport implements ModelDriven<Miss
 	public static Map<String,MissionBean> getMissions() {
 		return missions;
 	}
+	@Jurisdiction({"BackgroundLogin","UtilsUsed"})
 	public static void removeMission(String id){
 		missions.remove(id);
 	}
@@ -42,11 +44,13 @@ public class CateMissionAction extends ActionSupport implements ModelDriven<Miss
 		return result;
 	}
 	//获取当前已存在任务
+	@Jurisdiction({"BackgroundLogin"})
 	public String cateMission(){
 		ServletActionContext.getRequest().setAttribute("mission", missions.values());
 		return SUCCESS;
 	}
 	//添加任务
+	@Jurisdiction({"BackgroundLogin","UtilsUsed"})
 	public String mission(){
 		if(mission!=null){
 			if(mission.getCode()!=null&&mission.getCode()==1){
