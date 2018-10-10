@@ -144,6 +144,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	        	}
 	        	ServletActionContext.getRequest().getSession().setAttribute("cart", cart);
 			}
+	        if(ServletActionContext.getRequest().getSession().getAttribute("fav") == null){
+	        	Status status = ordersService.findByStatus("MYWISH");
+	        	Orders fav = null;
+	        	if(status!=null)
+	        		fav = ordersService.findCartByUserIdStatusId(existUser.getId(),status.getId());
+	        	if(fav==null){
+	        		fav = new Orders();
+	        		globalService.saveOrUpdate(fav);
+	        	}
+	        	ServletActionContext.getRequest().getSession().setAttribute("cart", fav);
+			}
 	        if(null==existUser.getAvatar()){	//判断为没有初始化头像，让其去继续补充资料
 	        	return "registSuccess";
 	        }

@@ -79,13 +79,16 @@
 	    	<result>WEB-INF/views/admin/{3}.jsp</result>
 		</action>
 		<action name="admin_*" class="cn.catecat.user.action.UserAction" method="{1}">
-	    	<result name="admin" type="redirectAction">adminUi_admin</result>
-	    	<result name="login" type="redirectAction">adminUi_login</result>
+	    	<result name="admin" type="redirectAction">admin</result>
+	    	<result name="login" type="redirectAction">adminLogin</result>
+		</action>
+		<action name="adminLogin">
+			<result>WEB-INF/views/admin/login.jsp</result>
 		</action>
 		
-		
-		<action name="adminUi_*">
+		<action name="adminUi_*" class="cn.catecat.jurisdiction.action.JurisdictionAction" method="admin">
 			<result>WEB-INF/views/admin/{1}.jsp</result>
+			<result name="login">WEB-INF/views/admin/login.jsp</result>
 		</action>
 		<action name="jurisdiction_*" class="cn.catecat.jurisdiction.action.JurisdictionAction" method="{1}">
 			<result name="{1}">WEB-INF/views/admin/{1}.jsp</result>
@@ -138,6 +141,8 @@
 		<action name="cart_*" class="cn.catecat.orders.action.CartAction" method="{1}"></action>
 		<!--订单处理 -->
 		<action name="orders_*" class="cn.catecat.orders.action.OrdersAction" method="{1}"></action>
+		<!-- 我的收藏 -->
+		<action name="fav_*" class="cn.catecat.orders.action.FavAction" method="{1}"></action>
 		<!--布局处理 -->
 		<action name="layout_*" class="cn.catecat.layout.action.LayoutAction" method="{1}"></action>
 		<!--套餐处理 -->

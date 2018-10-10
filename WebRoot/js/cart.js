@@ -24,6 +24,7 @@ $(function(){
 		removeCartItem();
 		removeAllCartItem();
 		gotoByOrder();
+		addFavItem();
 });
 /* 计算每项价格 */
 function calcSubPrice(el,num){
@@ -144,4 +145,23 @@ function removeAllCartItem(){
 			},"json");
 	    }); 
 	});
+}
+
+//添加到我的收藏
+function addFavItem(){
+	$(".add-fav").unbind();
+	$(".add-fav").bind("click",function(){
+		$.post("json/fav_addFav","cateId="+$(this).attr("data-id")+"&count=1",function(data){
+			console.log(data);
+			if(!(data instanceof Object))data = eval("("+data+")");
+			if(data.result == true){
+				swal("Good!", "成功添加到我的收藏！", "success");
+			}else if(data.result == 'warning'){
+				swal("OMG","请勿重复添加","warning");
+			}	
+			else{
+				swal("OMG!", "未登录的用户，请去登录", "error");
+			}
+		},"json");
+	})
 }

@@ -295,7 +295,7 @@
 						<!-- <button type="button" class="btn btn-add btn-add-compare">
 							<i class="fa fa-refresh"></i>
 						</button> -->
-						<button type="button" class="btn btn-add btn-add-wish">
+						<button type="button" class="btn btn-add btn-add-fav add-fav">
 							<i class="fa fa-heart-o"></i>
 						</button>
 						<button type="button" class="btn btn-add btn-add-cart add-cart">

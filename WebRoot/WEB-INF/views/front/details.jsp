@@ -215,7 +215,7 @@
 										<!-- <button type="button" class="btn btn-add btn-add-compare">
 											<i class="fa fa-refresh"></i>
 										</button> -->
-										<button type="button" class="btn btn-add btn-add-wish">
+										<button type="button" class="btn btn-add btn-add-fav add-fav" data-id="${id}">
 											<i class="fa fa-heart-o"></i>
 										</button>
 									</div>
@@ -475,7 +475,7 @@
 										<span class="product-price">${marketPrice}</span>
 									</div>
 									<div class="add-buttons">
-										<button type="button" class="btn btn-add btn-add-wish">
+										<button type="button" class="btn btn-add btn-add-fav add-fav" data-id="${id}">
 											<i class="fa fa-heart-o"></i>
 										</button>
 										<button type="button" class="btn btn-add btn-add-cart add-cart" data-id="${id}">
@@ -554,6 +554,7 @@ $(function(){
 		imgbox.style.left = right.offsetLeft-imgbox.offsetWidth-20+"px";
 	})
 	binkEvent();
+	addFavItem();
 	/* $(".max-image li").unbind("click");
 	$(".max-image li").bind("click",function(){
 		$("#img").attr("src","img_requestImg?type=max&id="+$(this).attr("data-id"));
@@ -588,6 +589,24 @@ function binkEvent(){
 			}
 		},"json");
 	});
+}
+//添加到我的收藏
+function addFavItem(){
+	$(".add-fav").unbind();
+	$(".add-fav").bind("click",function(){
+		$.post("json/fav_addFav","cateId="+$(this).attr("data-id")+"&count=1",function(data){
+			console.log(data);
+			if(!(data instanceof Object))data = eval("("+data+")");
+			if(data.result == true){
+				swal("Good!", "成功添加到我的收藏！", "success");
+			}else if(data.result == 'warning'){
+				swal("OMG","请勿重复添加","warning");
+			}	
+			else{
+				swal("OMG!", "未登录的用户，请去登录", "error");
+			}
+		},"json");
+	})
 }
 </script>
 </body>

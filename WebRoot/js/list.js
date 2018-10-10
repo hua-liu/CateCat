@@ -137,11 +137,13 @@ function reSearch(init){
 			$cate.find(".image img").attr("src","img_requestCateImg?id="+data.rows[i].id+"&type=cate");
 			$cate.find(".image-add-mod").attr("data-id",data.rows[i].id);
 			$cate.find(".add-cart").attr("data-id",data.rows[i].id);
+			$cate.find(".add-fav").attr("data-id",data.rows[i].id);
 			$cate.find(".sign").html((new Date().getTime()-7*24*60*60*1000)<new Date(data.rows[i].onLineTime).getTime()?'新品':data.rows[i].log.buyCount>100?'热销':data.rows[i].log.viewCount>1000?'热门':'');
 			if($cate.find(".sign").html()=='')$cate.find(".sign").parent().hide();
 			$(".show-catebox").append($cate);
 			bindEvent();
 			addCartItem();
+			addFavItem();
 		}
 	},"json")
 	return false;
@@ -153,6 +155,7 @@ function bindEvent(){
 		$('#showPic').modal('show');
 	})
 }
+//添加我的购物车
 function addCartItem(){
 	$(".add-cart").unbind();
 	$(".add-cart").bind("click",function(){
@@ -166,6 +169,24 @@ function addCartItem(){
 			}
 		},"json");
 	});
+}
+//添加到我的收藏
+function addFavItem(){
+	$(".add-fav").unbind();
+	$(".add-fav").bind("click",function(){
+		$.post("json/fav_addFav","cateId="+$(this).attr("data-id")+"&count=1",function(data){
+			console.log(data);
+			if(!(data instanceof Object))data = eval("("+data+")");
+			if(data.result == true){
+				swal("Good!", "成功添加到我的收藏！", "success");
+			}else if(data.result == 'warning'){
+				swal("OMG","请勿重复添加","warning");
+			}	
+			else{
+				swal("OMG!", "未登录的用户，请去登录", "error");
+			}
+		},"json");
+	})
 }
  //工具提示
 function tooltip(text,el){

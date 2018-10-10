@@ -149,7 +149,7 @@
 													<span class="product-price">￥${shopPrice }</span>
 												</div>
 												<div class="add-buttons">
-													<button type="button" class="btn btn-add btn-add-wish">
+													<button data-id="${id}" type="button" class="btn btn-add btn-add-fav add-fav">
 														<i class="fa fa-heart-o"></i>
 													</button>
 													<button data-id="${id}" type="button" class="btn btn-add btn-add-cart add-cart">
@@ -394,7 +394,7 @@
 												<span class="product-price">￥${shopPrice }</span>
 											</div>
 											<div class="add-buttons">
-												<button type="button" class="btn btn-add btn-add-wish">
+												<button data-id="${id}" type="button" class="btn btn-add btn-add-fav add-fav">
 													<i class="fa fa-heart-o"></i>
 												</button>
 												<button data-id="${id}" type="button" class="btn btn-add btn-add-cart add-cart">
@@ -436,6 +436,7 @@ $(function(){
 		$('#showPic').modal('show');
 	})
 	addCartItem();
+	addFavItem();
 })
 //添加到购物车
 function addCartItem(){
@@ -451,6 +452,24 @@ function addCartItem(){
 			}
 		},"json");
 	});
+}
+//添加到我的收藏
+function addFavItem(){
+	$(".add-fav").unbind();
+	$(".add-fav").bind("click",function(){
+		$.post("json/fav_addFav","cateId="+$(this).attr("data-id")+"&count=1",function(data){
+			console.log(data);
+			if(!(data instanceof Object))data = eval("("+data+")");
+			if(data.result == true){
+				swal("Good!", "成功添加到我的收藏！", "success");
+			}else if(data.result == 'warning'){
+				swal("OMG","请勿重复添加","warning");
+			}	
+			else{
+				swal("OMG!", "未登录的用户，请去登录", "error");
+			}
+		},"json");
+	})
 }
 </script>
 </body>
